@@ -192,7 +192,7 @@ xTimerReset(timerWatchDog, 0);
   //Извлечение минут
   strftime(myStr, 3, "%M", &timeinfo);
   minute  = String(myStr).toInt();
-  //Извлечение часов
+  //Извлечение часа даты
   strftime(myStr, 3, "%H", &timeinfo);
   hour    = String(myStr).toInt();
   //Извлечение дня даты
@@ -202,24 +202,19 @@ xTimerReset(timerWatchDog, 0);
   strftime(myStr, 3, "%m", &timeinfo);
   month   = String(myStr).toInt();
   //Повторяется в начале каждого часа, если текущее значение минут меньше предшествующего
-  if (minute < saved_minute)
+  if (hour != saved_hour)
   {
-      //Запоминание минимально возможного значения для исключения повторного входа в это условие
-      saved_minute = 0;
       //Разрешение повторной отправки ежечасовогого уведомления
       flag_alarm_power = true;
       //Проверка переполнения счетчика киловат-часов PZEM
       //При приближении к переполнению отправка уведомления, сохранение нового значения коррекции, сброс счетчика PZEM в 0
       if (energy >= 9900.0) {IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Counter overflow")), String(""), String(energy)); energy_correction_value = energy_correction_value + energy; memory.putFloat("correction", energy_correction_value); pzem.resetEnergy();}
   }
-  //Текущее значение минут не меньше предшествующего, сохранение текущего значения минут
-  else saved_minute = minute;
+  saved_hour = hour;
 
   //Повторяется один раз в месяц в день равный дню предшествующего снятия показаний, если текущее значение дня увеличилось (начало суток)
-  if (day == day_before && day > saved_day)
+  if (day == day_before && day != saved_day)
   {
-      //Запоминание максимально возможного значения для исключения повторного входа в это условие
-      saved_day = 31;
       //Разрешение повторной отправки ежесуточного уведомления
       flag_alarm_rate = true;
       //Установка показаний  начала отсчета месячного периода
@@ -232,8 +227,7 @@ xTimerReset(timerWatchDog, 0);
       //Отправка уведомления
       IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Month, starting point")), String(" ") + String (energy_before_value, 1), String(""));
   }
-  //Текущий день не равен назначенному или он не увеличился с прошлой проверки, сохранение значения дня текущей даты
-  else saved_day = day;
+  saved_day = day;
 }
 /**/
 

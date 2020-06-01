@@ -43,7 +43,13 @@ mqttClient.setClientId(board_name);
 
 /*Получение времени с NTP сервера*/
 GetTime();
-
+//Извлечение часа дня
+strftime(myStr, 3, "%H", &timeinfo);
+saved_hour = String(myStr).toInt();
+//Извлечение дня даты
+strftime(myStr, 3, "%d", &timeinfo);
+saved_day = String(myStr).toInt();
+ 
 /*>-----------< PZEM >-----------<*/
 //Инициализация экрана
 SPI.begin(TFT_SCLK, TFT_MISO, TFT_MOSI);

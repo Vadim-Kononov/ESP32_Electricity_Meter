@@ -10,8 +10,8 @@ Serial.begin(115200);
 /*Инициализация NVS памяти*/
 memory.begin("memory", false);
 
-/*Первоначальное (первое для платы) сохранение логина и пароля WiFi закомментировано*/
-//memory.putString("login", "One"); memory.putString("pass", "73737373");
+/*Закомментировано первоначальное (для первой загрузки на плату скетча) сохранение логина и пароля WiFi*/
+//memory.putString("login", "login"); memory.putString("pass", "pass");
 
 /*Назначение функции WiFiEvent*/
 WiFi.onEvent(WiFiEvent);

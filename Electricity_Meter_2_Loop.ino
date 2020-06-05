@@ -2,18 +2,13 @@ void loop()
 {
 if (flag_OTA_pass) ArduinoOTA.handle();
 
-/*Проверка подключения клиентов Telnet*/
+/*Подключения клиента Telnet*/
 if (TelnetServer.hasClient())
 {
-if (!TelnetClient || !TelnetClient.connected())
-{
-if(TelnetClient) TelnetClient.stop();
-TelnetClient = TelnetServer.available();
+if(TelnetClient) TelnetClient.stop(); TelnetClient = TelnetServer.available(); flag_OTA_pass = false;
 TelnetClient.println("My IP:\t" + WiFi.localIP().toString() + "\t|\tYour IP:\t" + TelnetClient.remoteIP().toString());
-flag_OTA_pass = false;
 }
-else TelnetServer.available().stop();
-}
+
 /*Получение строки из Telnet, при ее наличии. Отправка строки в Terminal для обработки*/
 if (TelnetClient && TelnetClient.connected() && TelnetClient.available()) {while(TelnetClient.available()) Terminal(TelnetClient.readStringUntil('\n'), B010);}
 

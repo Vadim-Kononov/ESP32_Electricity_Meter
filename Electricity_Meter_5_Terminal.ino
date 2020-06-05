@@ -78,6 +78,9 @@ else if (string_1.equalsIgnoreCase("Time")) {char time_str[50]; GetTime(); strft
 /* "Mem". Вывод количества свободной памяти*/
 else if (string_1.equalsIgnoreCase("Mem")) {Writeln ("> Free memory: " + String(ESP.getFreeHeap()), terminal);}
 
+/* "TFT". Инициализация экрана при его зависании*/
+else if (string_1.equalsIgnoreCase("TFT")) {TFT_Init (); Writeln ("> TFT Init", terminal);}
+
 /* "OTA". Разрешение загрузки по воздуху*/
 else if (string_1.equalsIgnoreCase("OTA")) {ArduinoOTA.begin(); flag_OTA_pass = true; Writeln ("> OTA On: " + String(ESP.getFreeSketchSpace()), terminal);}
 
@@ -144,17 +147,17 @@ else Writeln ("> PZEM: Invalid PZEM string", terminal);
 else if (string_1.equalsIgnoreCase("?") || string_1.equalsIgnoreCase("Help"))
 {Writeln (">" +
 String("\n| Login/<SSID>/<Password> |") +
-String("\n| Scan | WiFi | Reconnect | Reset|") +
-String("\n| Count| CountRes   |") +
+String("\n| Scan | WiFi | Reconnect | Reset |") +
+String("\n| Count | CountRes | TFT |") +
 String("\n| Time | Mem  | OTA |") +
 String("\n| PZEM/Now/<kWh> |") +
 String("\n| PZEM/Before/<kWh> |") +
-String("\n| PZEM/Date/<day>/<month>|") +
+String("\n| PZEM/Date/<day>/<month> |") +
 String("\n| PZEM/Delay/<sec> |") +
 String("\n| PZEM/PriceLow/<RUR>  |") +
 String("\n| PZEM/PriceHigh/<RUR> |") +
 String("\n| PZEM/LowLimit/<kWh>  |") +
-String("\n| PZEM/AlarmPower/<kWh>|") +
+String("\n| PZEM/AlarmPower/<kWh> |") +
 String("\n| PZEM/AlarmRate/<RUR> |") +
 String("\n| ? | Help |") +
 String("\n>")

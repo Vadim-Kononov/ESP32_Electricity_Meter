@@ -53,12 +53,7 @@ saved_day = String(myStr).toInt();
 /*>-----------< PZEM >-----------<*/
 //Инициализация экрана
 SPI.begin(TFT_SCLK, TFT_MISO, TFT_MOSI);
-tft.init(240, 240, SPI_MODE3);
-tft.setRotation(3);
-tft.setTextWrap(0);
-//Определение и установка цвета заливки
-color = tft.color565(0, 0, 10);
-tft.fillScreen(color);
+TFT_Init ();
 //Загрузка сохраненных в NVS значений переменных
 energy_correction_value 	= memory.getFloat("correction", 0.0);
 energy_before_value 		  = memory.getFloat("before", 0.0);

@@ -2,8 +2,6 @@ void loop()
 {
 if (flag_OTA_pass) ArduinoOTA.handle();
 
-
-
 /*Проверка подключения клиентов Telnet*/
 if (TelnetServer.hasClient())
 {
@@ -18,8 +16,6 @@ else TelnetServer.available().stop();
 }
 /*Получение строки из Telnet, при ее наличии. Отправка строки в Terminal для обработки*/
 if (TelnetClient && TelnetClient.connected() && TelnetClient.available()) {while(TelnetClient.available()) Terminal(TelnetClient.readStringUntil('\n'), B010);}
-
-
 
 /*Получение строки из Bluetooth, при ее наличии. Отправка строки в Terminal для обработки*/
 if (SerialBT.available()) Terminal(SerialBT.readStringUntil('\n'), B100);
@@ -136,10 +132,10 @@ if (counter_y == 2 && flag_timerenable)
 flag_motion = false;
 //Сброс флага отслеживающего однократность команды на запуск таймера
 flag_timerenable  = false;
-//Процедура получения и обработки данных с PZEM, передачи данных в Internet, переподключений при необходимости
-Interchange();
 //Запуск таймера определяющего время прекращения движения строк
 xTimerChangePeriod(timerMotion, pdMS_TO_TICKS(int(round(delay_scroll*1000.0))) , 0);
+//Процедура получения и обработки данных с PZEM, передачи данных в Internet, переподключений при необходимости
+Interchange();
 //В параметре 0 дополнительно передача данных на ThingSpeakSend. Таймер в это время уже считает для уменьшения общего времени задержки
 if (parameter == 0) ThingSpeakSend ();
 }
@@ -147,7 +143,7 @@ if (parameter == 0) ThingSpeakSend ();
 if (flag_motion) counter_y = counter_y - 7;
 //При уходе всех строк за верхнюю границу экран возврат указателя на нижнюю границу
 //Разрешение обработки следующего параметра, разрешение запуска таймера
-if (counter_y < -215) {counter_y = 240; flag_update = true; parameter++; flag_timerenable  = true;}
+if (counter_y < -215) {counter_y = 240; flag_timerenable  = true; parameter++; flag_update = true;}
 /*>-----------< PZEM >-----------<*/
 
 /*Сброс сторожевого таймера*/

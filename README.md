@@ -97,5 +97,12 @@ Serial Bluetooth Terminal |https://play.google.com/store/apps/details?id=de.kai_
 IFTTT                     |https://play.google.com/store/apps/details?id=com.ifttt.ifttt)
 ThingView Full            |https://play.google.com/store/apps/details?id=com.cinetica_tech.thingview.full
 
+-------------------------------------------------------------------------------------------------------------------------------------
+### Посмотреть на результат:
+Сервис     | Ссылка
+-----------|--------------------
+ThingSpeak |https://thingspeak.com/channels/1061956
+YouTube    |https://youtu.be/sH5VCsjLUSs    
+
   
   

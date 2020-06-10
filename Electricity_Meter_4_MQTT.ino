@@ -70,12 +70,12 @@ DEBUG_PRINTLN (String(xTaskGetTickCount()/1000.0) + "\tmqtt_Send ()");
 if (flag_MQTT_connected)
 {
 mqttClient.publish("power",			    0, false, String(power, 1).c_str());
-mqttClient.publish("energy_month",	0, false, String(energy_month_value, 1).c_str());
+mqttClient.publish("energy_month",	0, false, String(energy_month_value, 3).c_str());
 mqttClient.publish("voltage",		    0, false, String(voltage, 1).c_str());
 mqttClient.publish("current",		    0, false, String(current, 3).c_str());
 mqttClient.publish("pf",			      0, false, String(pf, 2).c_str());
 mqttClient.publish("frequency",		  0, false, String(frequency, 1).c_str());
-mqttClient.publish("energy_global",	0, false, String(energy_current_value, 3).c_str());
+mqttClient.publish("energy_global",	0, false, String(energy_current_value, 2).c_str());
 mqttClient.publish("rate",			    0, false, String(rate, 1).c_str());
 mqttClient.publish("month",			    0, false, String(String(day_before) + " " + String(monthnames[month_before]) + " >>> " + String(energy_before_value, 3) + " kW*h").c_str());
 }

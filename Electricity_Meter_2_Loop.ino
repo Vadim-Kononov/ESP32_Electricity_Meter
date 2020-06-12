@@ -157,7 +157,7 @@ xTimerReset(timerWatchDog, 0);
   //Электроэнергия в kWh
   energy				= pzem.energy();
   //Текущее значение электроэнергии, то что насчитал PZEM плюс коррекция
-  energy_current_value = energy_correction_value + energy;
+  energy_current_value = energy_main_counter_value + energy + energy * energy_correction_value;
   //Текущее значение электроэнергии с начала месячного периода, общее текущее значение минус сохраненное на начало отсчета значение
   energy_month_value = energy_current_value - energy_before_value;
   //Вычисление стоимости, если расход не превышает социального лимита (130kWh)
@@ -171,9 +171,9 @@ xTimerReset(timerWatchDog, 0);
   //Сила тока
   current				= pzem.current();
   //Коэффициент мощности
-  pf					= pzem.pf();
+  pf					  = pzem.pf();
   //Частота
-  frequency = pzem.frequency();
+  frequency     = pzem.frequency();
   //Проверка и переподключение WiFi и MQTT
   WiFiReconnect ();
   //Отправка значений по MQTT
@@ -201,7 +201,7 @@ xTimerReset(timerWatchDog, 0);
       flag_alarm_power = true;
       //Проверка переполнения счетчика киловат-часов PZEM
       //При приближении к переполнению отправка уведомления, сохранение нового значения коррекции, сброс счетчика PZEM в 0
-      if (energy >= 9900.0) {IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Counter overflow")), String(""), String(energy)); energy_correction_value = energy_correction_value + energy; memory.putFloat("correction", energy_correction_value); pzem.resetEnergy();}
+      if (energy >= 9900.0) {IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Counter overflow")), String(""), String(energy)); energy_main_counter_value = energy_main_counter_value + energy; memory.putFloat("main_counter", energy_main_counter_value); pzem.resetEnergy();}
   }
   saved_hour = hour;
 

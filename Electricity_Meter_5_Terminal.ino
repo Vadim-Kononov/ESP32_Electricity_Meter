@@ -87,16 +87,22 @@ else if (string_1.equalsIgnoreCase("OTA")) {ArduinoOTA.begin(); flag_OTA_pass = 
 /* "PZEM". Настройка параметров счетчика*/
 else if (string_1.equalsIgnoreCase("PZEM") && !string_2.equalsIgnoreCase(""))
 {
-if (string_2.equalsIgnoreCase("Now"))
+if (string_2.equalsIgnoreCase("Main"))
 {
-if (!string_3.equalsIgnoreCase("")) {pzem.resetEnergy(); energy_correction_value = string_3.toFloat(); memory.putFloat("correction", energy_correction_value);}
-Writeln ("> PZEM: Now value " + String(energy_correction_value, 3)  + String(" kWh"), terminal);
+if (!string_3.equalsIgnoreCase("")) {pzem.resetEnergy(); energy_main_counter_value = string_3.toFloat(); memory.putFloat("main_counter", energy_main_counter_value);}
+Writeln ("> PZEM: Main value " + String(energy_main_counter_value, 3)  + String(" kWh"), terminal);
 }
 
 else if (string_2.equalsIgnoreCase("Before"))
 {
 if (!string_3.equalsIgnoreCase("")) {energy_before_value = string_3.toFloat(); memory.putFloat("before", energy_before_value);}
 Writeln ("> PZEM: Before value " + String(energy_before_value, 3)  + String(" kWh"), terminal);
+}
+
+else if (string_2.equalsIgnoreCase("Correct"))
+{
+if (!string_3.equalsIgnoreCase("")) {energy_correction_value = string_3.toFloat(); memory.putFloat("correction", energy_correction_value);}
+Writeln ("> PZEM: Correct value " + String(energy_correction_value, 6) + String("1/kWh"), terminal);
 }
 
 else if (string_2.equalsIgnoreCase("Date"))
@@ -150,8 +156,9 @@ String("\n| Login/<SSID>/<Password> |") +
 String("\n| Scan | WiFi | Reconnect | Reset |") +
 String("\n| Count | CountRes | TFT |") +
 String("\n| Time | Mem  | OTA |") +
-String("\n| PZEM/Now/<kWh> |") +
+String("\n| PZEM/Main/<kWh> |") +
 String("\n| PZEM/Before/<kWh> |") +
+String("\n| PZEM/Correct/<kWh> |") +
 String("\n| PZEM/Date/<day>/<month> |") +
 String("\n| PZEM/Delay/<sec> |") +
 String("\n| PZEM/PriceLow/<RUR>  |") +

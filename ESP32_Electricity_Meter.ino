@@ -196,10 +196,11 @@ power,						          //Текущая мощность, Вт
 energy,						          //Накопленный с последнего сброса в PZEM расход электроэнергии, кВт
 frequency,					        //Текущая частота, Гц
 pf,							            //Текущий коэффициент мощности
-energy_correction_value,	  //Значение расхода добавляемого к расходу PZEM для соответствия реальному счетчику, кВт*ч
-energy_current_value,		    //Текущее значение расхода электроэнергии,  energy_current_value = energy_correction_value + energy, кВт*ч
+energy_main_counter_value,	//Значение расхода добавляемого к расходу PZEM для соответствия реальному счетчику, кВт*ч
 energy_before_value,		    //Значение расхода электроэнергии на 00:00 даты ежемесячного фиксирования показаний, кВт*ч
 energy_month_value,			    //Текущее значение месячного расхода электроэнергии, energy_month_value = energy_current_value - energy_before_value, кВт*ч
+energy_current_value,       //Текущее значение расхода электроэнергии,  energy_current_value = energy_main_counter_value + energy + energy * energy_correction_value, кВт*ч
+energy_correction_value,    //Коррекция расхода электроэнергии приведенная к одному кВт*ч, отрицательная, если счетчик спешит, положительная, если отстает
 rate,						            //Расход денег с начала месяца соответсвующий energy_month_value, руб.
 price_low =         3.96,		//Стоимость кВт*ч по социальному тарифу, руб./кВт*ч
 price_high =        5.53,		//Стоимость кВт*ч сверх социального тарифа, руб./кВт*ч

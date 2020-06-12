@@ -55,19 +55,20 @@ saved_day = String(myStr).toInt();
 SPI.begin(TFT_SCLK, TFT_MISO, TFT_MOSI);
 TFT_Init ();
 //Загрузка сохраненных в NVS значений переменных
-energy_correction_value 	= memory.getFloat("correction", 0.0);
-energy_before_value 		  = memory.getFloat("before", 0.0);
+energy_main_counter_value 	= memory.getFloat("main_counter", 0.0);
+energy_before_value 		    = memory.getFloat("before", 0.0);
+energy_correction_value     = memory.getFloat("correction", 0.0);
 
-day_before 					      = memory.getInt("day", day_before);
-month_before 				      = memory.getInt("month", month_before);
-delay_scroll 				      = memory.getFloat("delay", delay_scroll);
+day_before 					        = memory.getInt("day", day_before);
+month_before 				        = memory.getInt("month", month_before);
+delay_scroll 				        = memory.getFloat("delay", delay_scroll);
 
-price_low 					      = memory.getFloat("price1", price_low);
-price_high 					      = memory.getFloat("price2", price_high);
-energy_low_value 			    = memory.getFloat("low_value", energy_low_value);
+price_low 					        = memory.getFloat("price1", price_low);
+price_high 					        = memory.getFloat("price2", price_high);
+energy_low_value 			      = memory.getFloat("low_value", energy_low_value);
 
-alarm_power 				      = memory.getFloat("alarm_power", 1000.0);
-alarm_rate 					      = memory.getFloat("alarm_rate", 10000.0);
+alarm_power 				        = memory.getFloat("alarm_power", 1000.0);
+alarm_rate 					        = memory.getFloat("alarm_rate", 10000.0);
 //Стирание не используемых ключей
 //memory.remove("");
 

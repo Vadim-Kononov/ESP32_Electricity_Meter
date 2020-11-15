@@ -12,7 +12,7 @@ PZEM004Tv30 pzem(&Serial2);
 #include "soc/rtc_cntl_reg.h"
 
 /*Имя платы*/
-const char *  board_name PROGMEM = "PZEM";
+const char *  board_name PROGMEM = "El_Meter";
 
 /*>-----------< Включение вывода в Serial и (или) Telnet, Bluetooth для отладки >-----------<*/
 #define DEBUG 0
@@ -201,6 +201,7 @@ energy_before_value,		    //Значение расхода электроэне
 energy_month_value,			    //Текущее значение месячного расхода электроэнергии, energy_month_value = energy_current_value - energy_before_value, кВт*ч
 energy_current_value,       //Текущее значение расхода электроэнергии,  energy_current_value = energy_main_counter_value + energy + energy * energy_correction_value, кВт*ч
 energy_correction_value,    //Коррекция расхода электроэнергии приведенная к одному кВт*ч, отрицательная, если счетчик спешит, положительная, если отстает
+rate_before,                //Расход денег за прошлый месяц, руб.
 rate,						            //Расход денег с начала месяца соответсвующий energy_month_value, руб.
 price_low =         3.96,		//Стоимость кВт*ч по социальному тарифу, руб./кВт*ч
 price_high =        5.53,		//Стоимость кВт*ч сверх социального тарифа, руб./кВт*ч
@@ -224,7 +225,7 @@ uint16_t unit_text_color    [6] = {WHITE, GREEN, GREEN, CYAN, YELLOW, YELLOW}; /
 uint16_t value_text_color   [6] = {WHITE, GREEN, GREEN, CYAN, YELLOW, YELLOW}; //Цвет текста величины параметра
 
 const char
-* monthnames[]  = {"", "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"};
+* monthnames[]  = {"", "Янв", "Фев", "Мар", "Апр", "Мая", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"};
 
 String	 unit_name			    [6] = {"W", "V", "A","Cos", "kWh", "RuR"};     //Соответсвующие параметрам единицы измерения
 /*>-----------< PZEM >-----------<*/

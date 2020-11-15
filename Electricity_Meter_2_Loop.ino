@@ -210,15 +210,17 @@ xTimerReset(timerWatchDog, 0);
   {
       //Разрешение повторной отправки ежесуточного уведомления
       flag_alarm_rate = true;
-      //Установка показаний  начала отсчета месячного периода
+      //Установка показаний  начала отсчета месячного периода и сохранение расхода и стоимости за предшествующий месяц
       energy_before_value = energy_current_value;
+      rate_before = rate;
       memory.putFloat("before", energy_before_value);
+      memory.putFloat("rate_before", rate_before);
       memory.putInt("day", day_before);
       //Запоминание номера текущего месяца
       month_before = month;
       memory.putInt("month", month_before);
       //Отправка уведомления
-      IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Month, starting point")), String(" ") + String (energy_before_value, 1), String(""));
+      IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Month, starting point")), String(" ") + String (energy_before_value, 1) + String(" & ") + String (rate_before, 0) + String(" RUR"), String(""));
   }
   saved_day = day;
 }

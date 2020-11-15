@@ -77,7 +77,7 @@ mqttClient.publish("pf",			      0, false, String(pf, 2).c_str());
 mqttClient.publish("frequency",		  0, false, String(frequency, 1).c_str());
 mqttClient.publish("energy_global",	0, false, String(energy_current_value, 2).c_str());
 mqttClient.publish("rate",			    0, false, String(rate, 1).c_str());
-mqttClient.publish("month",			    0, false, String(String(day_before) + " " + String(monthnames[month_before]) + " >>> " + String(energy_before_value, 3) + " kW*h").c_str());
+mqttClient.publish("month",			    0, false, String(String(day_before) + " " + String(monthnames[month_before]) + " <> " + String(long(energy_before_value)) + " kW*h <> " + String(rate_before, 0) + " руб.").c_str());
 }
 }
 /**/

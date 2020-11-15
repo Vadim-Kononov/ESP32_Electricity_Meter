@@ -58,6 +58,7 @@ TFT_Init ();
 energy_main_counter_value 	= memory.getFloat("main_counter", 0.0);
 energy_before_value 		    = memory.getFloat("before", 0.0);
 energy_correction_value     = memory.getFloat("correction", 0.0);
+rate_before                 = memory.getFloat("rate_before", 0.0);
 
 day_before 					        = memory.getInt("day", day_before);
 month_before 				        = memory.getInt("month", month_before);
@@ -81,5 +82,5 @@ xTimerStart(timerWatchDog, 0);
 memory.putInt("countReset", memory.getInt("countReset") + 1);
 
 /*Отправка IFTTT оповещения о перезагрузке*/
-IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Reloading ")), String("Res:") + String (memory.getInt("countReset")), String(" WiFi:") + String (memory.getInt("countWifi")));
+IFTTTSend (String(ifttt_event), String(board_name) + " " + String(F("Reboot")), String("Res.") + String (memory.getInt("countReset")), String("WiFi.") + String (memory.getInt("countWifi")));
 }
